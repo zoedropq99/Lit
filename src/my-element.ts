@@ -39,18 +39,27 @@ export class MyElement extends LitElement {
       }
       return
     }
+if (
+  (usuario === 'zoeabdiel' && contraseña === 'zoeabdiel') ||
+  (usuario === 'admin' && contraseña === '1234') 
+) {
+  if (feedback) {
+    feedback.textContent = 'Inicio de sesión exitoso.'
+    feedback.style.color = 'green'
+  }
 
-    if (usuario === 'admin' && contraseña === '1234') {
-      if (feedback) {
-        feedback.textContent = 'Inicio de sesión exitoso.'
-        feedback.style.color = 'green'
-      }
-    } else {
-      if (feedback) {
-        feedback.textContent = 'Usuario o contraseña incorrectos.'
-        feedback.style.color = 'red'
-      }
-    }
+  localStorage.setItem('usuario', usuario)
+
+  setTimeout(() => {
+    window.location.href = 'inicio.html'
+  }, 1000)
+} else {
+  if (feedback) {
+    feedback.textContent = 'Usuario o contraseña incorrectos.'
+    feedback.style.color = 'red'
+  }
+}
+
   }
 
   private _handleForgotPassword() {
@@ -60,7 +69,7 @@ export class MyElement extends LitElement {
   render() {
     return html`
       <div class="contorno">
-       <img src=${logoImage} alt="Logo" class="logo" />
+        <img src=${logoImage} alt="Logo" class="logo" />
         <form id="loginForm" novalidate @submit=${this._handleSubmit}>
           <h2 class="inicios">Login</h2>
 
@@ -105,7 +114,6 @@ export class MyElement extends LitElement {
   }
 
   static styles = css`
-    :host,
     :host * {
       box-sizing: border-box;
     }
@@ -164,7 +172,7 @@ export class MyElement extends LitElement {
 
     .input-group input {
       width: 100%;
-      padding: 0.75rem 1rem 0.75rem 2.5rem; /* espacio a la izquierda para el ícono */
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
       border: 2px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
@@ -233,20 +241,21 @@ export class MyElement extends LitElement {
     }
 
     .inicios {
-     font-size: 2rem;
-     background: purple;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-     color: purple; 
+      font-size: 2rem;
+      background: purple;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: purple;
       font-family: Verdana;
     }
-       .logo {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    width: 300px; 
-    height: auto;
-  }
+
+    .logo {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 300px;
+      height: auto;
+    }
   `
 }
 
